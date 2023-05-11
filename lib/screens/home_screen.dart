@@ -5,8 +5,17 @@ import 'package:pragyan/widgets/circle_stack.dart';
 import 'package:pragyan/config/courses.dart';
 import 'package:pragyan/widgets/course_tile.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final controller = TextEditingController();
+  List<List<String>> allCourses = Courses.courseList;
+  List<List<String>> courses = Courses.courseList;
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +88,8 @@ class HomeScreen extends StatelessWidget {
                             ),
                             child: Center(
                               child: TextField(
+                                controller: controller,
+                                onChanged: searchCourse,
                                 style: GoogleFonts.poppins(
                                     fontSize: 12,
                                     color: Colors.black,
@@ -111,8 +122,12 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ),
                             child: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.search),
+                              onPressed: () {
+                                resetSearchBar();
+                              },
+                              icon: controller.text == ''
+                                  ? const Icon(Icons.search)
+                                  : const Icon(Icons.close),
                               color: Colors.white,
                             ),
                           )
@@ -136,15 +151,25 @@ class HomeScreen extends StatelessWidget {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(20),
-                      child: ListView.builder(
-                        itemCount: Courses.courseList.length,
-                        itemBuilder: ((BuildContext context, index) {
-                          return CourseTile(
-                            courseName: Courses.courseList[index][0],
-                            logoPath: Courses.courseList[index][1],
-                          );
-                        }),
-                      ),
+                      child: courses.isNotEmpty
+                          ? ListView.builder(
+                              itemCount: courses.length,
+                              itemBuilder: ((BuildContext context, index) {
+                                return CourseTile(
+                                  courseName: courses[index][0],
+                                  logoPath: courses[index][1],
+                                );
+                              }),
+                            )
+                          : Text(
+                              "Course Not Found",
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.poppins(
+                                fontSize: 12,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.black,
+                              ),
+                            ),
                     ),
                   ),
                 ),
@@ -154,5 +179,26 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void searchCourse(String query) {
+    courses = allCourses;
+    final suggestions = courses.where((course) {
+      final courseName = course[0].toLowerCase();
+      final input = query.toLowerCase();
+
+      return courseName.contains(input);
+    }).toList();
+
+    setState(() {
+      courses = suggestions;
+    });
+  }
+
+  void resetSearchBar() {
+    setState(() {
+      controller.clear();
+      courses = allCourses;
+    });
   }
 }
