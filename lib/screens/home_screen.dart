@@ -4,6 +4,7 @@ import 'package:pragyan/config/palette.dart';
 import 'package:pragyan/widgets/circle_stack.dart';
 import 'package:pragyan/config/courses.dart';
 import 'package:pragyan/widgets/course_tile.dart';
+import 'package:pragyan/widgets/side_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,11 +17,14 @@ class _HomeScreenState extends State<HomeScreen> {
   final controller = TextEditingController();
   List<List<String>> allCourses = Courses.courseList;
   List<List<String>> courses = Courses.courseList;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       resizeToAvoidBottomInset: false,
+      drawer: SideDrawer(),
       backgroundColor: ColorConstants.scaffoldBackgroundColor,
       body: Stack(
         children: [
@@ -43,7 +47,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         //Menu Bar
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            _scaffoldKey.currentState!.openDrawer();
+                          },
                           icon: const Icon(
                             Icons.menu_rounded,
                             color: Colors.white,
