@@ -35,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Stack(
               children: [
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     //Top Navigation Bar
                     Row(
@@ -71,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     //Search box
                     Padding(
-                      padding: const EdgeInsets.only(top: 50),
+                      padding: const EdgeInsets.only(top: 30),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -134,13 +135,79 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 10),
+                            padding: const EdgeInsets.all(20),
+                            height: 120,
+                            width: MediaQuery.of(context).size.width * 0.42,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white,
+                            ),
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child:
+                                      Image.asset('assets/icons/bullhorn.png'),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  "College Updates",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 10),
+                            padding: const EdgeInsets.all(20),
+                            height: 120,
+                            width: MediaQuery.of(context).size.width * 0.42,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white,
+                            ),
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child: Image.asset(
+                                      'assets/icons/university.png'),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  "University Updates",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                   ],
                 ),
                 //Scaffold Card White
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                    height: MediaQuery.of(context).size.height * 0.65,
+                    height: MediaQuery.of(context).size.height * 0.60,
                     width: double.infinity,
                     decoration: const BoxDecoration(
                       color: Colors.white,
