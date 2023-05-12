@@ -1,9 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pragyan/config/palette.dart';
+import 'package:pragyan/services/fetch_json.dart';
 
 class SemesterScreen extends StatefulWidget {
   final String courseCode;
@@ -17,20 +15,18 @@ class _SemesterScreenState extends State<SemesterScreen> {
   List _papers = [];
   String? _courseName;
 
-  Future<void> readJson() async {
-    final String response =
-        await rootBundle.loadString('assets/jsons/${widget.courseCode}.json');
-    final data = await json.decode(response);
-
-    setState(() {
-      _papers = data['papers'];
-      _courseName = data['courseName'];
-    });
+  void getPapers() async {
+    var data = await fetchJson(widget.courseCode);
+    if (data!.isNotEmpty) {
+      setState(() {
+        _papers = data;
+      });
+    }
   }
 
   @override
   void initState() {
-    readJson();
+    getPapers();
     super.initState();
   }
 
@@ -69,44 +65,55 @@ class _SemesterScreenState extends State<SemesterScreen> {
                       MediaQuery.of(context).padding.top -
                       MediaQuery.of(context).padding.bottom,
                 ),
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                  ),
-                  itemCount: _papers.length,
-                  itemBuilder: (BuildContext context, index) {
-                    return GridTile(
-                      child: Container(
-                        margin: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
+                child: _papers.isNotEmpty
+                    ? GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
                         ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Year : ${_papers[index]['year'].toString()}',
-                              style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black,
-                                fontSize: 20,
+                        itemCount: _papers.length,
+                        itemBuilder: (BuildContext context, index) {
+                          return GridTile(
+                            child: Container(
+                              margin: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Year : ${_papers[index]['year'].toString()}',
+                                    style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Sem : ${_papers[index]['sem'].toString()}',
+                                    style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            Text(
-                              'Sem : ${_papers[index]['sem'].toString()}',
-                              style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ],
+                          );
+                        },
+                      )
+                    : Center(
+                        child: Text(
+                          'No papers found for ${widget.courseCode}',
+                          style: GoogleFonts.poppins(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
-                    );
-                  },
-                ),
               ),
             ],
           ),
