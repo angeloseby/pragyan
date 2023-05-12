@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pragyan/config/palette.dart';
+import 'package:pragyan/screens/semester_screen.dart';
 import 'package:pragyan/widgets/circle_stack.dart';
 import 'package:pragyan/config/courses.dart';
 import 'package:pragyan/widgets/course_tile.dart';
@@ -228,9 +229,17 @@ class _HomeScreenState extends State<HomeScreen> {
                           ? ListView.builder(
                               itemCount: courses.length,
                               itemBuilder: ((BuildContext context, index) {
-                                return CourseTile(
-                                  courseName: courses[index][0],
-                                  logoPath: courses[index][1],
+                                return GestureDetector(
+                                  onTap: () => Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) {
+                                    return SemesterScreen(
+                                        courseCode: courses[index][2]);
+                                  })),
+                                  child: CourseTile(
+                                    courseName: courses[index][0],
+                                    logoPath: courses[index][1],
+                                  ),
                                 );
                               }),
                             )

@@ -1,0 +1,42 @@
+{
+  "courseName": "B A English",
+  "courseCode": "ugenglish",
+  "totalSemesters": 6,
+  "papers": [
+    {
+      "sem": 1,
+      "year": 2018,
+      "link": "https://drive.google.com/file/d/0B4z2gzEmkDDCa0tNQWMtNTk1Z2s/view?usp=sharing&resourcekey=0-Zf0OPixiKWgm8JZirbp7JA"
+    },
+    {
+      "sem": 1,
+      "year": 2020,
+      "link": "https://drive.google.com/file/d/0B4z2gzEmkDDCa0tNQWMtNTk1Z2s/view?usp=sharing&resourcekey=0-Zf0OPixiKWgm8JZirbp7JA"
+    },
+    {
+      "sem": 1,
+      "year": 2022,
+      "link": "https://drive.google.com/file/d/0B4z2gzEmkDDCa0tNQWMtNTk1Z2s/view?usp=sharing&resourcekey=0-Zf0OPixiKWgm8JZirbp7JA"
+    },
+    {
+      "sem": 2,
+      "year": 2018,
+      "link": "https://drive.google.com/file/d/0B4z2gzEmkDDCa0tNQWMtNTk1Z2s/view?usp=sharing&resourcekey=0-Zf0OPixiKWgm8JZirbp7JA"
+    },
+    {
+      "sem": 2,
+      "year": 2018,
+      "link": "https://drive.google.com/file/d/0B4z2gzEmkDDCa0tNQWMtNTk1Z2s/view?usp=sharing&resourcekey=0-Zf0OPixiKWgm8JZirbp7JA"
+    },
+    {
+      "sem": 3,
+      "year": 2018,
+      "link": "https://drive.google.com/file/d/0B4z2gzEmkDDCa0tNQWMtNTk1Z2s/view?usp=sharing&resourcekey=0-Zf0OPixiKWgm8JZirbp7JA"
+    },
+    {
+      "sem": 4,
+      "year": 2022,
+      "link": "https://drive.google.com/file/d/0B4z2gzEmkDDCa0tNQWMtNTk1Z2s/view?usp=sharing&resourcekey=0-Zf0OPixiKWgm8JZirbp7JA"
+    }
+  ]
+}
